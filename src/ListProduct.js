@@ -1,17 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
-import {Nav,NavDropdown} from 'react-bootstrap'
+import { useEffect,useState } from "react";
+import {Nav,NavDropdown,Table} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
-function ListProduct(){
-    //  useEffect(()=>{
-    //       get()
-    // },[])
 
-    // async function get(){
-    //     let result =  await fetch("http://localhost:8000/api/read",{
-    //     method:"GET"
-    //   })
-    // }
+import './Navbar.css'
+function ListProduct(){
+    const [data,setData] = useState([])
+     useEffect(()=>{
+          get()
+    },[])
+
+     function get(){
+    fetch("http://localhost:8000/api/read").then((result)=>{
+        result.json().then((resp)=>{
+            console.log("result",resp);
+        })
+    })
+    
+    }
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user-info'));
     function logout(){
@@ -20,7 +26,7 @@ function ListProduct(){
     }
     return(
         <div>
-            <Nav>
+            <Nav className='header'>
              {
       localStorage.getItem('user-info')?
                     <>
@@ -44,7 +50,30 @@ function ListProduct(){
         </NavDropdown>
       </Nav>:null
       }
-      <h1>Product List Will ne soon Uploaded!</h1>
+     {/* <Table>
+     <thead>
+     <tr>
+        <th>#</th> 
+        <th>Name</th> 
+        <th>Image</th> 
+        <th>Description</th> 
+        <th>Price</th> 
+     </tr>
+     </thead>
+     <tbody>
+     {
+     data.map((item)=>
+     <tr>
+     <td>{item.id}</td>
+     <td>{item.name}</td>
+     <td>{item.file}</td>
+     <td>{item.description}</td>
+     <td>{item.price}</td>
+     </tr>)
+     }
+     
+     </tbody>
+     </Table> */}
         </div>
     )
 }

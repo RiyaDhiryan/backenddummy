@@ -1,5 +1,6 @@
-// import './Login.css'
-import {Button} from 'react-bootstrap'
+import './Login.css'
+// import './Navbar.css'
+// import {Button} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 import {Nav} from 'react-bootstrap';
 import{useNavigate} from 'react-router-dom'
@@ -41,7 +42,7 @@ function Login(){
     }
     return(
         <div className='signup'>
-            <Nav>
+            <Nav className='header'>
              {
       localStorage.getItem('user-info')?
                     <>
@@ -57,8 +58,8 @@ function Login(){
       </Nav>
                 <h1>Welcome Back!</h1>
                  <input type='text' placeholder='Enter Email' onChange={(e)=>setEmail(e.target.value)}/><br/>
-                 <input type='text' placeholder='Enter password' onChange={(e)=>setPassword (e.target.value)}/><br/> 
-                 <Button onClick={login}>Login</Button>
+                 <input type='email' placeholder='Enter password' onChange={(e)=>setPassword (e.target.value)}/><br/> 
+                 <button className='click' onClick={login}>Login</button>
 
         </div>
     )

@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {Nav,NavDropdown} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
+import './Navbar.css'
 function UpdateProduct(){
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user-info'));
@@ -10,7 +11,7 @@ function UpdateProduct(){
     }
     return(
         <div>
-                <Nav>
+                <Nav className='header'>
              {
       localStorage.getItem('user-info')?
                     <>

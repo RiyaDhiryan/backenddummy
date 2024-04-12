@@ -3,6 +3,8 @@ import {Button} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import {Nav} from 'react-bootstrap'
+import './signup.css'
+// import './Navbar.css'
 function SignUp(){
   const [name,setName] = useState("")
   const [email,setEmail] = useState("")
@@ -40,8 +42,8 @@ async function signUp(){
   
 }
   return(
-    <div>
-            <Nav>
+    <div className='signup'>
+            <Nav className='header'>
              {
       localStorage.getItem('user-info')?
                     <>
@@ -57,9 +59,9 @@ async function signUp(){
       </Nav>
   <h1>Welcome!</h1>
   <input type='text'placeholder='Enter Your Name' value={name} onChange={(e)=>setName(e.target.value)}/><br/>
-  <input type='text'placeholder='Enter Your Email' value={email} onChange={(e)=>setEmail(e.target.value)}/><br/>
+  <input type='email'placeholder='Enter Your Email' value={email} onChange={(e)=>setEmail(e.target.value)}/><br/>
   <input type='text'placeholder='Enter Your Password' value={password} onChange={(e)=>setPassword(e.target.value)}/><br/>
-  <Button onClick={signUp}>Sign Up</Button>
+  <Button className='click' onClick={signUp}>Sign Up</Button>
     </div>
   )
 }
