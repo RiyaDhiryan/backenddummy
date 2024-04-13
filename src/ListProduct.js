@@ -9,20 +9,33 @@ function ListProduct(){
      useEffect(()=>{
           get()
     },[])
-
-     function get(){
-    fetch("http://localhost:8000/api/read").then((result)=>{
-        result.json().then((resp)=>{
-            console.log("result",resp);
+    function get(){
+        fetch("http://localhost:8000/api/read").then((result)=>{
+            result.json().then((resp)=>{
+                console.log("data",resp);
+                setData(resp.user)
+            })
         })
-    })
-    
     }
+    
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user-info'));
     function logout(){
         localStorage.clear();
         navigate('/login')
+    }
+    async function deleteOperation(id){
+        fetch(`http://localhost:8000/api/delete/${id}`,{
+            method:"DELETE"
+        }).then((result)=>{
+             result.json().then((resp)=>{
+            console.log("DELETE",resp);
+            get();
+             })
+             
+        })
+        
+      
     }
     return(
         <div>
@@ -50,31 +63,38 @@ function ListProduct(){
         </NavDropdown>
       </Nav>:null
       }
-     {/* <Table>
+      <Table>
      <thead>
      <tr>
-        <th>#</th> 
+     <th>ID</th> 
         <th>Name</th> 
         <th>Image</th> 
         <th>Description</th> 
-        <th>Price</th> 
+        <th>Price</th>
+         <th>Update</th>  
+        <th>Delete</th> 
+       
      </tr>
      </thead>
      <tbody>
      {
-     data.map((item)=>
-     <tr>
-     <td>{item.id}</td>
+     data.map((item,i)=>
+     <tr key ={i}>
+         <td>{i+1}</td> 
      <td>{item.name}</td>
-     <td>{item.file}</td>
+     <td><img style={{width:70},{height:50}} src={"http://localhost:8000/api/getimage/"+item.file} alt="pic"/></td>
      <td>{item.description}</td>
      <td>{item.price}</td>
+      <td><span>Update</span></td>
+     <td><span onClick={deleteOperation(item._id)}>Delete</span></td>
+    
      </tr>)
      }
      
      </tbody>
-     </Table> */}
+     </Table>
         </div>
     )
 }
+
 export default ListProduct;
